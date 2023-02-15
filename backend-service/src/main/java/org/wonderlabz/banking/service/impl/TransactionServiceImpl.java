@@ -16,6 +16,8 @@ import org.wonderlabz.banking.types.TransactionType;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
@@ -34,6 +36,8 @@ public class TransactionServiceImpl implements TransactionService {
         transaction.setTransactionAmount(new BigDecimal(transferRequest.getAmount()));
         transaction.setSourceAccountId(sourceAccount.getAccountId());
         transaction.setTargetAccountId(targetAccount.getAccountId());
+        transaction.setTransactionDateTime(new Date());
+        transaction.setComments("Test");
         accountRepository.save(sourceAccount);
         accountRepository.save(targetAccount);
         transactionRepository.save(transaction);
@@ -52,6 +56,8 @@ public class TransactionServiceImpl implements TransactionService {
         transaction.setTransactionType(TransactionType.TRANSFER.toString());
         transaction.setTransactionAmount(new BigDecimal(withdrawRequest.getAmount()));
         transaction.setSourceAccountId(account.getAccountId());
+        transaction.setTransactionDateTime(new Date());
+        transaction.setComments("Test");
         accountRepository.save(account);
         transactionRepository.save(transaction);
         return true;
@@ -64,8 +70,15 @@ public class TransactionServiceImpl implements TransactionService {
         transaction.setTransactionType(TransactionType.TRANSFER.toString());
         transaction.setTransactionAmount(new BigDecimal(depositRequest.getAmount()));
         transaction.setTargetAccountId(account.getAccountId());
+        transaction.setTransactionDateTime(new Date());
+        transaction.setComments("Test");
         accountRepository.save(account);
         transactionRepository.save(transaction);
         return true;
+    }
+
+    @Override
+    public List<Transaction> getAllTransactions() {
+        return transactionRepository.findAll();
     }
 }

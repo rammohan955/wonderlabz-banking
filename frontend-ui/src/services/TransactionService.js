@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-const TRANSACTION_API_BASE_URL = 'http://localhost:8080/api/v1';
+const TRANSACTION_API_BASE_URL = 'http://localhost:8080/transaction';
 
 class TransactionService{
 
     async getAllTransactions() {
-        const response = await axios.get(TRANSACTION_API_BASE_URL+'/transactions');
+        const response = await axios.get(TRANSACTION_API_BASE_URL+'/view');
         return response.data;
     }
 

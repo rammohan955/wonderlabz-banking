@@ -6,6 +6,8 @@ import org.wonderlabz.banking.request.DepositRequest;
 import org.wonderlabz.banking.request.TransferRequest;
 import org.wonderlabz.banking.request.WithdrawRequest;
 
+import java.util.List;
+
 public interface TransactionService {
     boolean makeTransfer(Account sourceAccount, Account targetAccount, TransferRequest transferRequest);
 
@@ -14,4 +16,6 @@ public interface TransactionService {
     boolean withdraw(Account account, WithdrawRequest withdrawRequest);
 
     boolean deposit(Account account, DepositRequest depositRequest);
+
+    List<Transaction> getAllTransactions();
 }

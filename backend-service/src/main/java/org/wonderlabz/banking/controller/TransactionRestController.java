@@ -10,6 +10,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.wonderlabz.banking.entity.Account;
+import org.wonderlabz.banking.entity.Transaction;
 import org.wonderlabz.banking.request.DepositRequest;
 import org.wonderlabz.banking.request.TransferRequest;
 import org.wonderlabz.banking.request.WithdrawRequest;
@@ -20,6 +21,7 @@ import org.wonderlabz.banking.validators.ValidatorService;
 import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -108,7 +110,7 @@ public class TransactionRestController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deposit(
             @Valid @RequestBody DepositRequest depositRequest) {
-        LOGGER.debug("Triggered AccountRestController.deposit");
+        LOGGER.debug("Triggered TransactionRestController.deposit");
         if (ValidatorService.isDepositRequestValid(depositRequest)) {
             // TODO implement lock mechanism after getting account.
             Account account = accountService.getAccount(depositRequest.getTargetAccountNumber());
@@ -127,6 +129,13 @@ public class TransactionRestController {
         } else {
             return new ResponseEntity<>(INVALID_TRANSACTION, HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/view")
+    public ResponseEntity<?> getTransactions() {
+        LOGGER.debug("Triggered TransactionRestController.getTransactions");
+        List<Transaction> accounts = transactionService.getAllTransactions();
+        return new ResponseEntity<>(accounts, HttpStatus.OK);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
