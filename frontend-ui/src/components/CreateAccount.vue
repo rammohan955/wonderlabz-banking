@@ -27,7 +27,7 @@
           label="Opening Balance"
         ></v-text-field>
         <v-btn color="primary" v-on:click="createAccount">
-          Register
+          Create Account
         </v-btn>
       </v-col>
       <v-col sm="6">

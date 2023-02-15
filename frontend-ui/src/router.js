@@ -1,26 +1,30 @@
-import Vue from "vue";
-import Router from "vue-router";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import CreateAccount from '@/components/CreateAccount.vue'
+import Transactions from '@/components/Transactions.vue'
 
-Vue.use(Router);
+Vue.use(VueRouter)
 
-export default new Router({
-  mode: "history",
-  routes: [
-    {
-      path: "/",
-      alias: "/App",
-      name: "app",
-      component: () => import("./App")
-    },
-     {
-       path: "/account",
-       name: "account",
-       component: () => import("./components/CreateAccount")
-     },
-    {
-      path: "/transactions",
-      name: "transactions",
-      component: () => import("./components/Transactions")
-    }
-  ]
-});
+const routes = [
+  {
+    path: '/',
+    name: 'App',
+    component: CreateAccount
+  },
+  {
+    path: '/account',
+    name: 'CreateAccount',
+    component: CreateAccount
+  },
+  {
+    path: '/transactions',
+    name: 'Transactions',
+    component: Transactions
+  }
+]
+
+const router = new VueRouter({
+  routes
+})
+
+export default router
