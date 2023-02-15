@@ -1,7 +1,6 @@
 <template>
 <v-container>
     <h1>Transaction Management</h1>
-    <p>Transaction List</p>
     <v-row>
       <v-col sm="12">
         <v-alert v-if="responseSuccess" dense text type="success">
@@ -9,25 +8,49 @@
         </v-alert>
       </v-col>
       <v-col sm="6">
-        <h3>Transaction</h3>
+        <h3>Transfer Amount</h3>
         <v-text-field
           v-model="transferRequest.sourceAccountNumber"
-          label="Account Number"
+          label="Source Account Number"
         ></v-text-field>
         <v-text-field
           v-model="transferRequest.targetAccountNumber"
-          label="Account Type"
+          label="Target Account Number"
         ></v-text-field>
         <v-text-field
           v-model="transferRequest.amount"
-          label="User Name"
+          label="Amount"
         ></v-text-field>
         <v-btn color="primary" v-on:click="transferAmount">
           Transfer Amount
         </v-btn>
+        <h3>Withdraw Amount</h3>
+        <v-text-field
+          v-model="withdrawRequest.sourceAccountNumber"
+          label="Source Account Number"
+        ></v-text-field>
+        <v-text-field
+          v-model="withdrawRequest.amount"
+          label="Amount"
+        ></v-text-field>
+        <v-btn color="primary" v-on:click="withdrawAmount">
+          Withdraw Amount
+        </v-btn>
+        <h3>Deposit Amount</h3>
+        <v-text-field
+          v-model="depositRequest.targetAccountNumber"
+          label="Target Account Number"
+        ></v-text-field>
+        <v-text-field
+          v-model="depositRequest.amount"
+          label="Amount"
+        ></v-text-field>
+        <v-btn color="primary" v-on:click="depositAmount">
+          Deposit Amount
+        </v-btn>
       </v-col>
       <v-col sm="6">
-        <h3>Accounts</h3>
+        <h3>Transaction History</h3>
         <v-simple-table>
           <template v-slot:default>
             <thead>
@@ -106,6 +129,28 @@ export default {
        this.transferRequest.sourceAccountNumber = "";
        this.transferRequest.targetAccountNumber = "";
        this.transferRequest.amount = "";
+       this.getTransactions();
+       this.responseSuccess = true;
+     },
+    withdrawAmount: async function() {
+       const requestData = {
+         sourceAccountNumber: this.withdrawRequest.sourceAccountNumber,
+         amount: this.withdrawRequest.amount
+       };
+       await TransactionService.withdraw(requestData);
+       this.withdrawRequest.sourceAccountNumber = "";
+       this.withdrawRequest.amount = "";
+       this.getTransactions();
+       this.responseSuccess = true;
+     },
+    depositAmount: async function() {
+       const requestData = {
+         sourceAccountNumber: this.depositRequest.targetAccountNumber,
+         amount: this.depositRequest.amount
+       };
+       await TransactionService.withdraw(requestData);
+       this.depositRequest.targetAccountNumber = "";
+       this.depositRequest.amount = "";
        this.getTransactions();
        this.responseSuccess = true;
      },

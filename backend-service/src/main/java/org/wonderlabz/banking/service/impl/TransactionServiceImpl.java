@@ -53,7 +53,7 @@ public class TransactionServiceImpl implements TransactionService {
     public boolean withdraw(Account account, WithdrawRequest withdrawRequest) {
         account.setCurrentBalance(account.getCurrentBalance().subtract(new BigDecimal(withdrawRequest.getAmount())));
         Transaction transaction = new Transaction();
-        transaction.setTransactionType(TransactionType.TRANSFER.toString());
+        transaction.setTransactionType(TransactionType.WITHDRAW.toString());
         transaction.setTransactionAmount(new BigDecimal(withdrawRequest.getAmount()));
         transaction.setSourceAccountId(account.getAccountId());
         transaction.setTransactionDateTime(new Date());
@@ -67,7 +67,7 @@ public class TransactionServiceImpl implements TransactionService {
     public boolean deposit(Account account, DepositRequest depositRequest) {
         account.setCurrentBalance(account.getCurrentBalance().add(new BigDecimal(depositRequest.getAmount())));
         Transaction transaction = new Transaction();
-        transaction.setTransactionType(TransactionType.TRANSFER.toString());
+        transaction.setTransactionType(TransactionType.DEPOSIT.toString());
         transaction.setTransactionAmount(new BigDecimal(depositRequest.getAmount()));
         transaction.setTargetAccountId(account.getAccountId());
         transaction.setTransactionDateTime(new Date());

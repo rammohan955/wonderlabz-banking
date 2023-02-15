@@ -1,7 +1,6 @@
 <template>
 <v-container>
     <h1>Account Management</h1>
-    <p>Account Registration</p>
     <v-row>
       <v-col sm="12">
         <v-alert v-if="responseSuccess" dense text type="success">

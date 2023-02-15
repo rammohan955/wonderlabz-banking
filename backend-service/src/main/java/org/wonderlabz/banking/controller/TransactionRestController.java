@@ -26,6 +26,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/transaction")
+@CrossOrigin("*")
 public class TransactionRestController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TransactionRestController.class);
