@@ -2,34 +2,44 @@
   <img alt="Vue logo" src="./assets/logo.png">
   <HelloWorld msg="Welcome to Wonderlabz Banking App"/>
 
-  <div id="app">
-      <nav class="navbar navbar-expand navbar-dark bg-dark">
-        <router-link to="/" class="navbar-brand">bezKoder</router-link>
-        <div class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <router-link to="/account" class="nav-link">Create Account</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/transactions" class="nav-link">Transactions</router-link>
-          </li>
-        </div>
-      </nav>
+  <v-app id="inspire">
+    <v-app-bar app color="white" flat>
+      <v-container class="py-0 fill-height">
 
-      <div class="container mt-3">
-        <router-view />
-      </div>
-    </div>
+        <!-- Menu Buttons -->
+        <v-btn to="/account" text>Account</v-btn>
+        <v-btn to="/transactions" text>Transactions</v-btn>
+
+        <v-spacer></v-spacer>
+
+        <v-responsive max-width="260"> </v-responsive>
+      </v-container>
+    </v-app-bar>
+
+<!-- Main content -->
+    <v-main class="grey lighten-3">
+      <v-container>
+        <v-row>
+          <v-col>
+            <v-sheet min-height="70vh" rounded="lg">
+              <!--  -->
+              <router-view></router-view>
+            </v-sheet>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
+export default{
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+  },
+  data: () => ({
+  }),
+};
 </script>
 
 <style>
